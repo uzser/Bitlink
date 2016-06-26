@@ -2,7 +2,7 @@ using Bitlink.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Bitlink.Data.Models.Mapping
+namespace Bitlink.Data.Mapping
 {
     public class UserMap : EntityTypeConfiguration<User>
     {
@@ -21,7 +21,10 @@ namespace Bitlink.Data.Models.Mapping
 
             HasMany(u => u.Links)
                 .WithMany(l => l.Users)
-                .Map(ul => ul.ToTable("UserLink"));
+                .Map(ul =>
+                    ul.ToTable("UserLink")
+                    .MapLeftKey("UserId")
+                    .MapRightKey("LinkId"));
         }
     }
 }

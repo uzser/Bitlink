@@ -161,6 +161,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="..\Configs\cs.config">
+      <Link>Configs\cs.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -184,7 +188,16 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Bitlink.Data\Bitlink.Data.csproj">
+      <Project>{d4c292fb-2b43-4e7b-9986-93b121b6768e}</Project>
+      <Name>Bitlink.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bitlink.Entities\Bitlink.Entities.csproj">
+      <Project>{3c6284a8-4484-46a4-873e-1414d73c39f2}</Project>
+      <Name>Bitlink.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bitlink.Entities", "Bitlink
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bitlink.Data", "Bitlink.Data\Bitlink.Data.csproj", "{D4C292FB-2B43-4E7B-9986-93B121B6768E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configs", "Configs", "{E65239A6-051E-4747-A0C5-4020C83EB6E2}"
+	ProjectSection(SolutionItems) = preProject
+		Configs\cs.config = Configs\cs.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

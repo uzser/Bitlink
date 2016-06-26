@@ -1,4 +1,4 @@
-using Bitlink.Data.Models.Mapping;
+using Bitlink.Data.Mapping;
 using Bitlink.Entities;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;

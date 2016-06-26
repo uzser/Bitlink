@@ -50,14 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitlinkDbContext.cs" />
-    <Compile Include="Models\Mapping\ClickMap.cs" />
-    <Compile Include="Models\Mapping\ErrorMap.cs" />
-    <Compile Include="Models\Mapping\LinkMap.cs" />
-    <Compile Include="Models\Mapping\UserMap.cs" />
+    <Compile Include="Migrations\InitMigration.cs" />
+    <Compile Include="Migrations\InitMigration.Designer.cs">
+      <DependentUpon>InitMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Mapping\ClickMap.cs" />
+    <Compile Include="Mapping\ErrorMap.cs" />
+    <Compile Include="Mapping\LinkMap.cs" />
+    <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +69,11 @@
       <Project>{3C6284A8-4484-46A4-873E-1414D73C39F2}</Project>
       <Name>Bitlink.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\InitMigration.resx">
+      <DependentUpon>InitMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
