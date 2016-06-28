@@ -1,4 +1,3 @@
-using Bitlink.Data.Models;
 using Bitlink.Entities;
 using System;
 
@@ -6,7 +5,7 @@ namespace Bitlink.Data.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Models.BitlinkDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<BitlinkDbContext>
     {
         public Configuration()
         {

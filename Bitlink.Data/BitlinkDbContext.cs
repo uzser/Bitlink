@@ -1,9 +1,9 @@
-using Bitlink.Data.Mapping;
-using Bitlink.Entities;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Bitlink.Data.Mapping;
+using Bitlink.Entities;
 
-namespace Bitlink.Data.Models
+namespace Bitlink.Data
 {
     public class BitlinkDbContext : DbContext
     {

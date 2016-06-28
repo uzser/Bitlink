@@ -9,15 +9,15 @@ namespace Bitlink.Data.Mapping
         public UserMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
             Property(t => t.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             // Table & Column Mappings
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.Uid).HasColumnName("Uid");
+            Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Uid).HasColumnName("Uid");
 
             HasMany(u => u.Links)
                 .WithMany(l => l.Users)

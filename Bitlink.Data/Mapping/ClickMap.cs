@@ -9,7 +9,7 @@ namespace Bitlink.Data.Mapping
         public ClickMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
             Property(t => t.Id)
