@@ -1,6 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bitlink.Data;
+using Bitlink.Data.Infrastructure;
+using Bitlink.Data.Repositories;
+using Bitlink.Data.Repositories.Extensions;
+using Bitlink.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
-using Bitlink.Data;
 
 namespace Bitlink.Tests.Database
 {
@@ -21,6 +26,14 @@ namespace Bitlink.Tests.Database
                 Assert.IsTrue(users.Any(), "Users are not found");
                 Assert.IsTrue(clicks.Any(), "Clicks are not found");
             }
+        }
+
+        [TestMethod]
+        public void GetLinksByUserUid()
+        {
+            var linkRepository = new EntityBaseRepository<Link>(new DbFactory());
+            var links = linkRepository.GetLinksByUserUid(Guid.Parse("00D84ECC-113E-4D5F-86AD-F67F79F708D0"));
+            Assert.IsTrue(links.Any(), "Links are not found");
         }
     }
 }

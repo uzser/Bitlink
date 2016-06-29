@@ -3,7 +3,6 @@ using Autofac.Integration.WebApi;
 using Bitlink.Data;
 using Bitlink.Data.Infrastructure;
 using Bitlink.Data.Repositories;
-using Bitlink.Web.Infrastructure.Core;
 using System.Data.Entity;
 using System.Reflection;
 using System.Web.Http;
@@ -43,10 +42,6 @@ namespace Bitlink.Web
             builder.RegisterGeneric(typeof(EntityBaseRepository<>))
                    .As(typeof(IEntityBaseRepository<>))
                    .InstancePerRequest();
-
-            // Generic Data Repository Factory
-            builder.RegisterType<DataRepositoryFactory>()
-                .As<IDataRepositoryFactory>().InstancePerRequest();
 
             Container = builder.Build();
 

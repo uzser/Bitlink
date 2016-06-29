@@ -1,6 +1,7 @@
 ﻿using Bitlink.Data.Infrastructure;
 using Bitlink.Data.Repositories;
 using Bitlink.Entities;
+using Bitlink.Web.Infrastructure.Utils;
 using System;
 using System.Data.Entity.Infrastructure;
 using System.Net;
@@ -20,13 +21,7 @@ namespace Bitlink.Web.Infrastructure.Core
             UnitOfWork = unitOfWork;
         }
 
-        public ApiControllerBase(IDataRepositoryFactory dataRepositoryFactory, IEntityBaseRepository<Error> errorsRepository, IUnitOfWork unitOfWork)
-        {
-            ErrorsRepository = errorsRepository;
-            UnitOfWork = unitOfWork;
-        }
-
-        protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage request, Func<HttpResponseMessage> function)
+        protected HttpResponseMessage CreateHttpResponse(Func<HttpResponseMessage> function)
         {
             HttpResponseMessage response;
 
@@ -37,15 +32,28 @@ namespace Bitlink.Web.Infrastructure.Core
             catch (DbUpdateException ex)
             {
                 LogError(ex);
-                response = request.CreateResponse(HttpStatusCode.BadRequest, ex.InnerException.Message);
+                response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.InnerException.Message);
             }
             catch (Exception ex)
             {
                 LogError(ex);
-                response = request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
             return response;
+        }
+
+        protected HttpResponseMessage CreateHttpResponseUsingUserUid(Func<Guid, HttpResponseMessage> function)
+        {
+            bool isNew;
+            var userUid = UIUtils.GetUserUid(Request, out isNew);
+            return CreateHttpResponse(() =>
+            {
+                var response = function(userUid);
+                if (isNew)
+                    UIUtils.SetUserUid(Request, response);
+                return response;
+            });
         }
 
         private void LogError(Exception ex)

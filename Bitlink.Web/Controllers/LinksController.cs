@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Bitlink.Data.Infrastructure;
 using Bitlink.Data.Repositories;
+using Bitlink.Data.Repositories.Extensions;
 using Bitlink.Entities;
 using Bitlink.Web.Infrastructure.Core;
 using Bitlink.Web.Models;
@@ -26,12 +27,11 @@ namespace Bitlink.Web.Controllers
 
         public HttpResponseMessage Get()
         {
-            return CreateHttpResponse(Request, () =>
+            return CreateHttpResponseUsingUserUid(userUid =>
             {
-                var links = _linksRepository.GetAll().ToList();
+                var links = _linksRepository.GetLinksByUserUid(userUid).ToList();
                 var linkViewModels = Mapper.Map<IEnumerable<Link>, IEnumerable<LinkViewModel>>(links);
                 var response = Request.CreateResponse(HttpStatusCode.OK, linkViewModels);
-
                 return response;
             });
         }
