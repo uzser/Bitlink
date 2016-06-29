@@ -27,9 +27,11 @@ namespace Bitlink.Web.Controllers
 
         public HttpResponseMessage Get()
         {
-            return CreateHttpResponseUsingUserUid(userUid =>
+            return CreateHttpResponseUsingUserUid((userUid, isNewUserUid) =>
             {
-                var links = _linksRepository.GetLinksByUserUid(userUid).ToList();
+                var links = isNewUserUid
+                    ? new List<Link>()
+                    : _linksRepository.GetLinksByUserUid(userUid).ToList();
                 var linkViewModels = Mapper.Map<IEnumerable<Link>, IEnumerable<LinkViewModel>>(links);
                 var response = Request.CreateResponse(HttpStatusCode.OK, linkViewModels);
                 return response;

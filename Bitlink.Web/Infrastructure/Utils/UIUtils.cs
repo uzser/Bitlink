@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 
 namespace Bitlink.Web.Infrastructure.Utils
 {
@@ -31,6 +32,32 @@ namespace Bitlink.Web.Infrastructure.Utils
             };
 
             response.Headers.AddCookies(new[] { cookie });
+        }
+
+        public static bool TryParseUrl(string url, out string formattedUrl)
+        {
+            formattedUrl = null;
+            Uri uri;
+            if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
+                return false;
+
+            var uriString = uri.ToString();
+
+            #region Removing duplicate slashes
+            const string schemeDelimeter = ":/";
+            var indexOfSchemeEnd = uriString.IndexOf(schemeDelimeter, StringComparison.Ordinal) + schemeDelimeter.Length;
+            var scheme = uriString.Substring(0, indexOfSchemeEnd);
+            uriString = scheme + uriString.Substring(indexOfSchemeEnd).Replace("//", "/").Replace("//", "/");
+            #endregion
+
+            var regex =
+                new Regex(UIRes.UrlValidationRegex);
+
+            var isValidUrl = regex.IsMatch(uriString);
+            if (isValidUrl)
+                formattedUrl = uriString;
+
+            return isValidUrl;
         }
     }
 }

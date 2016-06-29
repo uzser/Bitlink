@@ -43,14 +43,14 @@ namespace Bitlink.Web.Infrastructure.Core
             return response;
         }
 
-        protected HttpResponseMessage CreateHttpResponseUsingUserUid(Func<Guid, HttpResponseMessage> function)
+        protected HttpResponseMessage CreateHttpResponseUsingUserUid(Func<Guid, bool, HttpResponseMessage> function)
         {
-            bool isNew;
-            var userUid = UIUtils.GetUserUid(Request, out isNew);
+            bool isNewUserUid;
+            var userUid = UIUtils.GetUserUid(Request, out isNewUserUid);
             return CreateHttpResponse(() =>
             {
-                var response = function(userUid);
-                if (isNew)
+                var response = function(userUid, isNewUserUid);
+                if (isNewUserUid)
                     UIUtils.SetUserUid(Request, response);
                 return response;
             });
