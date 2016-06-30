@@ -20,7 +20,7 @@ namespace Bitlink.Web
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/spa").Include(
-                //"~/Scripts/spa/app.js"
+                "~/Scripts/spa/app.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

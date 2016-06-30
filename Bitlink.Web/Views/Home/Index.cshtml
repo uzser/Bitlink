@@ -1,6 +1,10 @@
-﻿<form class="row">
-    <div class="input-group input-group-lg col-sm-offset-3 col-sm-6">
-        <input type="text" class="center-block form-control input-lg" title="URL" placeholder="URL">
-        <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="button">Shorten</button></span>
+﻿<div ng-app="bitlink">
+    <div class="row">
+        <div class="input-group input-group-lg col-sm-offset-3 col-sm-6" ng-controller="linksCtrl">
+            <input type="text" class="center-block form-control input-lg" title="URL" ng-model="url" placeholder="URL">
+            <span class="input-group-btn">
+                <button class="btn btn-lg btn-primary" type="button" ng-click="postUrl()" ng-disabled="working">Shorten</button>
+            </span>
+        </div>
     </div>
-</form>
+</div>
