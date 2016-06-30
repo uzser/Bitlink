@@ -150,6 +150,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\ClicksController.cs" />
     <Compile Include="Controllers\LinksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Infrastructure\Utils\UIUtils.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Mappings\DomainToViewModelMappingProfile.cs" />
+    <Compile Include="Models\ClickViewModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\LinkViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
