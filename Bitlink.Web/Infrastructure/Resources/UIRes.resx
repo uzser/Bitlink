@@ -123,4 +123,7 @@
   <data name="UserUidCookieName" xml:space="preserve">
     <value>user_uid</value>
   </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Bitlink</value>
+  </data>
 </root>

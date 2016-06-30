@@ -4,24 +4,31 @@ namespace Bitlink.Web
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                "~/Scripts/vendors/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/vendors").Include(
+                "~/Scripts/vendors/jquery-{version}.js",
+                "~/Scripts/vendors/bootstrap.js",
+                "~/Scripts/vendors/angular.js",
+                "~/Scripts/vendors/respond.js",
+                "~/Scripts/vendors/angular-ui/ui-bootstrap.js",
+                "~/Scripts/vendors/angular-ui/ui-bootstrap-tpls.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/spa").Include(
+                //"~/Scripts/spa/app.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/content/css/bootstrap.css",
+                "~/content/css/ui-bootstrap-csp.css",
+                "~/content/css/site.css"));
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

@@ -61,6 +61,15 @@ namespace Bitlink.Web.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bitlink.
+        /// </summary>
+        public static string ApplicationName {
+            get {
+                return ResourceManager.GetString("ApplicationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&amp;=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&amp;=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&amp;;%@.\w_]*)#?(?:[.\!\/\\w]*))?).
         /// </summary>
         public static string UrlValidationRegex {
