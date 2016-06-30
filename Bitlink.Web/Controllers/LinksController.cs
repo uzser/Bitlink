@@ -20,13 +20,18 @@ namespace Bitlink.Web.Controllers
     {
         private readonly IEntityBaseRepository<Link> _linkRepository;
         private readonly IEntityBaseRepository<User> _userRepository;
+        private readonly IEntityBaseRepository<Click> _clickRepository;
 
-        public LinksController(IEntityBaseRepository<Link> linkRepository, IEntityBaseRepository<User> userRepository,
-             IEntityBaseRepository<Error> errorRepository, IUnitOfWork unitOfWork)
+        public LinksController(
+            IEntityBaseRepository<Link> linkRepository,
+            IEntityBaseRepository<User> userRepository,
+            IEntityBaseRepository<Click> clickRepository,
+            IEntityBaseRepository<Error> errorRepository, IUnitOfWork unitOfWork)
             : base(errorRepository, unitOfWork)
         {
             _linkRepository = linkRepository;
             _userRepository = userRepository;
+            _clickRepository = clickRepository;
         }
 
         [Route("{hash}")]
@@ -41,7 +46,7 @@ namespace Bitlink.Web.Controllers
                     response.Headers.Location = new Uri(Request.RequestUri, "/Errors/Error404");
                     return response;
                 }
-
+                _clickRepository.Add(new Click { Link = link, Date = DateTime.Now });
                 response.Headers.Location = new Uri(link.Url);
                 return response;
             });
