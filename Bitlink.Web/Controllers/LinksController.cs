@@ -73,24 +73,40 @@ namespace Bitlink.Web.Controllers
             return CreateHttpResponseUsingUserUid((userUid, isNewUserUid) =>
             {
                 string formattedUrl;
+
+                #region Parsing
                 if (!UIUtils.TryParseUrl(url, out formattedUrl))
                     return Request.CreateResponse(HttpStatusCode.Forbidden, new ResponseModel<LinkViewModel>
                     {
                         StatusMessage = UIConstants.StatusMessage.InvalidUrl
                     });
+                #endregion
 
-                var link = _linkRepository.FindBy(x => x.Url == formattedUrl).FirstOrDefault();
+                #region Link exists checking
+
+                var hashFromUrl = UIUtils.GetHashFromUrl(formattedUrl);
+
+                var link = _linkRepository
+                    .FindBy(x => x.Url == formattedUrl || x.Hash == hashFromUrl)
+                    .FirstOrDefault();
+
                 var user = _userRepository.GetOrAddUser(userUid);
+
                 if (link != null)
                 {
+                    var statusMessage = link.Url == formattedUrl
+                        ? UIConstants.StatusMessage.LinkExists
+                        : UIConstants.StatusMessage.AlreadyShortenedLink;
                     link.Users.Add(user);
                     return Request.CreateResponse(HttpStatusCode.OK, new ResponseModel<LinkViewModel>
                     {
-                        StatusMessage = UIConstants.StatusMessage.LinkExists,
+                        StatusMessage = statusMessage,
                         Data = CreateLinkViewModel(link, Request)
                     });
                 }
+                #endregion
 
+                #region Link creation
                 link = new Link
                 {
                     Url = formattedUrl,
@@ -105,6 +121,8 @@ namespace Bitlink.Web.Controllers
                     Data = CreateLinkViewModel(link, Request),
                 });
                 _linkRepository.Add(link);
+                #endregion
+
                 return response;
             });
         }

@@ -64,5 +64,10 @@ namespace Bitlink.Web.Infrastructure.Utils
         {
             return new Uri(request.RequestUri, "/" + hash).ToString();
         }
+
+        public static string GetHashFromUrl(string formattedUrl)
+        {
+            return new Uri(formattedUrl).LocalPath.Substring(1).Replace("/", "");
+        }
     }
 }
