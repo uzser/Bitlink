@@ -36,6 +36,27 @@ namespace Bitlink.Tests.Controllers
                 Assert.IsTrue(response.TryGetContentValue(out linkViewModels));
             }
         }
+        [TestMethod]
+        public void Post()
+        {
+            using (var mock = AutoMock.GetLoose())
+            {
+                mock.Mock<IEntityBaseRepository<Link>>();
+
+                // Arrange - configure the mock
+                var controller = mock.Create<LinksController>();
+
+                // Act
+                controller.Request = new HttpRequestMessage(HttpMethod.Get, new Uri("http://localhost/"));
+                controller.Configuration = new HttpConfiguration();
+
+                var response = controller.Get();
+
+                // Assert
+                IEnumerable<LinkViewModel> linkViewModels;
+                Assert.IsTrue(response.TryGetContentValue(out linkViewModels));
+            }
+        }
 
         [ClassInitialize]
         public static void TestSetup(TestContext context)

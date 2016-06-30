@@ -12,12 +12,12 @@ namespace Bitlink.Web.Infrastructure.Core
 {
     public class ApiControllerBase : ApiController
     {
-        protected readonly IEntityBaseRepository<Error> ErrorsRepository;
+        protected readonly IEntityBaseRepository<Error> ErrorRepository;
         protected readonly IUnitOfWork UnitOfWork;
 
-        public ApiControllerBase(IEntityBaseRepository<Error> errorsRepository, IUnitOfWork unitOfWork)
+        public ApiControllerBase(IEntityBaseRepository<Error> errorRepository, IUnitOfWork unitOfWork)
         {
-            ErrorsRepository = errorsRepository;
+            ErrorRepository = errorRepository;
             UnitOfWork = unitOfWork;
         }
 
@@ -28,6 +28,7 @@ namespace Bitlink.Web.Infrastructure.Core
             try
             {
                 response = function.Invoke();
+                UnitOfWork.Commit();
             }
             catch (DbUpdateException ex)
             {
@@ -65,7 +66,7 @@ namespace Bitlink.Web.Infrastructure.Core
                 DateCreated = DateTime.Now
             };
 
-            ErrorsRepository.Add(error);
+            ErrorRepository.Add(error);
             UnitOfWork.Commit();
         }
     }

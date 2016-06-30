@@ -8,6 +8,8 @@ namespace Bitlink.Web.Models
 
         public string Url { get; set; }
 
+        public string ShortUrl { get; set; }
+
         public string Hash { get; set; }
 
         public DateTime DateCreated { get; set; }

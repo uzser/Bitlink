@@ -38,7 +38,7 @@ namespace Bitlink.Web.Infrastructure.Utils
         {
             formattedUrl = null;
             Uri uri;
-            if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
+            if (!Uri.TryCreate(url.Replace(@"\", "/"), UriKind.Absolute, out uri))
                 return false;
 
             var uriString = uri.ToString();
@@ -58,6 +58,11 @@ namespace Bitlink.Web.Infrastructure.Utils
                 formattedUrl = uriString;
 
             return isValidUrl;
+        }
+
+        public static string GetShortUrl(HttpRequestMessage request, string hash)
+        {
+            return new Uri(request.RequestUri, "/" + hash).ToString();
         }
     }
 }

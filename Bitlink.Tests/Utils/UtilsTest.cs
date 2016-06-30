@@ -1,6 +1,5 @@
 ﻿using Bitlink.Web.Infrastructure.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
 
 namespace Bitlink.Tests.Utils
 {
