@@ -4,7 +4,7 @@
 
     function bootstrapAlert() { }
     bootstrapAlert.warning = function (message) {
-        $('#alert_placeholder').html('<div class="alert"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>')
+        $('#alert_placeholder').html('<div class="alert"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>');
     }
 
     function homeCtrl($scope, $http) {
@@ -26,7 +26,7 @@
                 }
             }).error(function (data, status, headers, config) {
                 var message = data.statusMessage ? data.statusMessage.replace('_', ' ') : "Oops... something went wrong";
-                bootstrapAlert.warning();
+                bootstrapAlert.warning(message);
                 $scope.working = false;
             });
         };
