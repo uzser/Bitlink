@@ -14,13 +14,14 @@ namespace Bitlink.Web
                 "~/Scripts/vendors/jquery-{version}.js",
                 "~/Scripts/vendors/bootstrap.js",
                 "~/Scripts/vendors/angular.js",
+                "~/Scripts/vendors/angular-route.js",
                 "~/Scripts/vendors/respond.js",
                 "~/Scripts/vendors/angular-ui/ui-bootstrap.js",
                 "~/Scripts/vendors/angular-ui/ui-bootstrap-tpls.js"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/spa").Include(
-                "~/Scripts/spa/app.js"
+            bundles.Add(new ScriptBundle("~/bundles/spa").IncludeDirectory(
+                "~/Scripts/spa/", "*.js", true
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

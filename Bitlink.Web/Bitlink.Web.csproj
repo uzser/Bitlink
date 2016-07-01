@@ -195,7 +195,12 @@
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Scripts\spa\links\linksCtrl.js" />
+    <Content Include="Scripts\vendors\angular-route.js" />
     <Content Include="Scripts\spa\app.js" />
+    <Content Include="Scripts\spa\home\homeCtrl.js" />
+    <Content Include="Scripts\spa\home\index.html" />
+    <Content Include="Scripts\spa\links\links.html" />
     <Content Include="Scripts\vendors\angular.min.js.map" />
     <None Include="Scripts\vendors\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\vendors\angular.min.js" />
