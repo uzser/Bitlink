@@ -3,6 +3,7 @@ using Bitlink.Data.Repositories;
 using Bitlink.Entities;
 using Bitlink.Web.Infrastructure.Utils;
 using System;
+using System.Data.Entity.Infrastructure;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -29,9 +30,15 @@ namespace Bitlink.Web.Infrastructure.Core
                 response = function.Invoke();
                 UnitOfWork.Commit();
             }
+            catch (DbUpdateException ex)
+            {
+                LogError(ex);
+                response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.InnerException.Message);
+            }
             catch (Exception ex)
             {
-                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message + ex.StackTrace);
+                LogError(ex);
+                response = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
             return response;
