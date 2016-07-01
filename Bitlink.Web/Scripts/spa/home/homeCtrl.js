@@ -25,7 +25,8 @@
                     bootstrapAlert.warning('ALREADY SHORTENED LINK');
                 }
             }).error(function (data, status, headers, config) {
-                bootstrapAlert.warning(data.statusMessage.replace('_', ' '));
+                var message = data.statusMessage ? data.statusMessage.replace('_', ' ') : "Oops... something went wrong";
+                bootstrapAlert.warning();
                 $scope.working = false;
             });
         };

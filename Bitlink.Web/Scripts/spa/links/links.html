@@ -12,7 +12,7 @@
             <th>Clicks</th>
         </tr>
         <tr>
-            <th colspan="4" ng-if="loadingLinks">Loading links...</th>
+            <th colspan="4" ng-if="loadingLinks">{{message}}</th>
         </tr>
         <tr ng-repeat="link in links">
             <td><a href="{{link.url}}">{{link.url}}</a></td>

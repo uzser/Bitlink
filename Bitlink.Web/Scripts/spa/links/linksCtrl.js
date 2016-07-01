@@ -4,6 +4,7 @@
 
     function linksCtrl($scope, $http) {
         $scope.loadingLinks = true;
+        $scope.message = "Loading links...";
 
         function loadData() {
             $http.get("/api/links", JSON.stringify($scope.url)).success(function (data, status, headers, config) {
