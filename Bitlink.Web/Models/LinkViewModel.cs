@@ -13,5 +13,7 @@ namespace Bitlink.Web.Models
         public string Hash { get; set; }
 
         public DateTime DateCreated { get; set; }
+
+        public int ClickCount { get; set; }
     }
 }

@@ -8,9 +8,17 @@
         <tr>
             <th>URL</th>
             <th>Short link</th>
-            <th>Date</th>
+            <th style="width: 150px;">Date</th>
             <th>Clicks</th>
         </tr>
-        
+        <tr>
+            <th colspan="4" ng-if="loadingLinks">Loading links...</th>
+        </tr>
+        <tr ng-repeat="link in links">
+            <td><a href="{{link.url}}">{{link.url}}</a></td>
+            <td><a href="{{link.shortUrl}}">{{link.shortUrl}}</a></td>
+            <td>{{link.dateCreated | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{link.clickCount}}</td>
+        </tr>
     </table>
 </div>

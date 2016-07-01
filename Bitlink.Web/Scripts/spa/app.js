@@ -3,7 +3,7 @@
 
     angular.module('bitlink', ['ngRoute'])
         .config([
-            '$routeProvider', '$locationProvider',
+            '$routeProvider',
             function ($routeProvider) {
                 $routeProvider
                     .when("/", {

@@ -10,7 +10,9 @@ namespace Bitlink.Web.Mappings
 
         protected override void Configure()
         {
-            CreateMap<Link, LinkViewModel>().ForMember(x => x.ShortUrl, x => x.Ignore());
+            CreateMap<Link, LinkViewModel>()
+                .ForMember(x => x.ShortUrl, x => x.Ignore())
+                .ForMember(x => x.ClickCount, x => x.ResolveUsing(l => l.Clicks.Count));
         }
     }
 }

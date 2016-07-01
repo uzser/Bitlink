@@ -1,24 +1,20 @@
 ﻿(function (app) {
     'use strict';
+    app.controller('linksCtrl', linksCtrl);
 
-    app.controller('linksCtrl', function ($scope, $http) {
-        $scope.message = "";
-        $scope.url = "";
-        $scope.working = false;
+    function linksCtrl($scope, $http) {
+        $scope.loadingLinks = true;
 
-        $scope.postUrl = function () {
-            $scope.working = true;
-            $scope.answered = false;
-            $scope.message = "shorting...";
-
-            $http.post("/api/links", JSON.stringify($scope.url)).success(function (data, status, headers, config) {
-                $scope.url = data.data.shortUrl;
+        function loadData() {
+            $http.get("/api/links", JSON.stringify($scope.url)).success(function (data, status, headers, config) {
+                $scope.links = data.data;
                 $scope.message = data.statusMessage;
-                $scope.working = false;
+                $scope.loadingLinks = false;
             }).error(function (data, status, headers, config) {
                 $scope.message = "Oops... something went wrong";
-                $scope.working = false;
             });
         };
-    });
+
+        loadData();
+    };
 })(angular.module('bitlink'));

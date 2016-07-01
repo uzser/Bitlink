@@ -1,24 +1,33 @@
 ﻿(function (app) {
     'use strict';
+    app.controller('homeCtrl', homeCtrl);
 
-    app.controller('homeCtrl', function ($scope, $http) {
-            $scope.message = "";
-            $scope.url = "";
-            $scope.working = false;
+    function bootstrapAlert() { }
+    bootstrapAlert.warning = function (message) {
+        $('#alert_placeholder').html('<div class="alert"><a class="close" data-dismiss="alert">×</a><span>' + message + '</span></div>')
+    }
 
-            $scope.postUrl = function () {
-                $scope.working = true;
-                $scope.answered = false;
-                $scope.message = "shorting...";
+    function homeCtrl($scope, $http) {
+        $scope.message = "";
+        $scope.url = "";
+        $scope.working = false;
 
-                $http.post("/api/links", JSON.stringify($scope.url)).success(function (data, status, headers, config) {
-                    $scope.url = data.data.shortUrl;
-                    $scope.message = data.statusMessage;
-                    $scope.working = false;
-                }).error(function (data, status, headers, config) {
-                    $scope.message = "Oops... something went wrong";
-                    $scope.working = false;
-                });
-            };
-        });
+        $scope.postUrl = function () {
+            $scope.working = true;
+            $scope.answered = false;
+            $scope.message = "shorting...";
+
+            $http.post("/api/links", JSON.stringify($scope.url)).success(function (data, status, headers, config) {
+                $scope.url = data.data.shortUrl;
+                $scope.message = data.statusMessage;
+                $scope.working = false;
+                if (data.statusMessage === 'ALREADY_SHORTENED_LINK') {
+                    bootstrapAlert.warning('ALREADY SHORTENED LINK');
+                }
+            }).error(function (data, status, headers, config) {
+                bootstrapAlert.warning(data.statusMessage.replace('_', ' '));
+                $scope.working = false;
+            });
+        };
+    };
 })(angular.module('bitlink'));
